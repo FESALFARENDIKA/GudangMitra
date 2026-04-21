@@ -9,7 +9,7 @@ GudangMitra adalah platform dropshipping dan reseller cerdas yang menghubungkan 
 | Item | URL |
 | :--- | :--- |
 | **Source Code** | [GitHub Repository](https://github.com/FESALFARENDIKA/GudangMitra) |
-| **Live Demo** | [https://fesalfarendika.github.io/GudangMitra](https://fesalfarendika.github.io/GudangMitra) |
+| **Live Demo** | [https://my-gudang-mitra.netlify.app/](https://my-gudang-mitra.netlify.app/) |
 
 ---
 
