@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GudangMitra - Platform Dropshipping & Reseller Terpercaya dengan Smart AI Recommendation, Auto Profit Calculator, dan Supplier Ranking.">
+  <title>GudangMitra - Platform Dropshipping & Reseller Cerdas</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">📦</div>
+        GudangMitra
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#features" class="active">Fitur</a>
+        <a href="#why">Keunggulan</a>
+        <a href="#platform">Platform</a>
+        <a href="#stats">Statistik</a>
+      </div>
+      <a href="login.html" class="nav-login">
+        👤 Login
+      </a>
+      <div class="mobile-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Platform Dropshipping #1 Indonesia
+        </div>
+        <h1>Solusi Cerdas<br><span>Reseller & Supplier</span><br>Terpercaya</h1>
+        <p class="hero-text">
+          Mulai bisnis dropshipping tanpa modal besar. Dapatkan rekomendasi produk laris dari AI, analisis margin otomatis, dan supplier tervalidasi.
+        </p>
+        <div class="hero-buttons">
+          <a href="login.html" class="btn btn-white btn-lg">Mulai Sekarang</a>
+          <a href="#features" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.3); color: white;">Lihat Fitur</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <!-- SVG Illustration -->
+        <div class="hero-illustration">
+          <svg viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background shapes -->
+            <rect x="100" y="80" width="300" height="250" rx="20" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            
+            <!-- Monitor/Dashboard -->
+            <rect x="130" y="100" width="240" height="160" rx="12" fill="white" opacity="0.95"/>
+            <rect x="140" y="110" width="220" height="25" rx="6" fill="#F0EDFF"/>
+            <circle cx="155" cy="122" r="5" fill="#EE5D50"/>
+            <circle cx="170" cy="122" r="5" fill="#FFB547"/>
+            <circle cx="185" cy="122" r="5" fill="#05CD99"/>
+            
+            <!-- Chart bars -->
+            <rect x="155" y="200" width="25" height="45" rx="4" fill="#4318FF" opacity="0.3"/>
+            <rect x="190" y="180" width="25" height="65" rx="4" fill="#4318FF" opacity="0.5"/>
+            <rect x="225" y="160" width="25" height="85" rx="4" fill="#4318FF" opacity="0.7"/>
+            <rect x="260" y="170" width="25" height="75" rx="4" fill="#4318FF" opacity="0.6"/>
+            <rect x="295" y="150" width="25" height="95" rx="4" fill="#4318FF"/>
+            <rect x="330" y="165" width="25" height="80" rx="4" fill="#05CD99"/>
+            
+            <!-- Trend line -->
+            <path d="M167 195 L202 175 L237 155 L272 165 L307 145 L342 160" stroke="#FFB547" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            
+            <!-- Monitor stand -->
+            <rect x="220" y="260" width="60" height="8" rx="2" fill="rgba(255,255,255,0.8)"/>
+            <rect x="200" y="268" width="100" height="6" rx="3" fill="rgba(255,255,255,0.6)"/>
+            
+            <!-- Floating boxes -->
+            <g transform="translate(50, 150)">
+              <rect width="60" height="55" rx="8" fill="#FFB547" opacity="0.9"/>
+              <rect x="8" y="8" width="44" height="30" rx="4" fill="white" opacity="0.3"/>
+              <text x="30" y="50" text-anchor="middle" fill="white" font-size="8" font-weight="bold">📦</text>
+            </g>
+            
+            <g transform="translate(390, 120)">
+              <rect width="65" height="55" rx="8" fill="#05CD99" opacity="0.9"/>
+              <text x="32" y="35" text-anchor="middle" fill="white" font-size="22">✓</text>
+            </g>
+            
+            <!-- Package boxes -->
+            <g transform="translate(80, 280)">
+              <rect width="45" height="40" rx="6" fill="#FFB547" opacity="0.8"/>
+              <line x1="0" y1="15" x2="45" y2="15" stroke="white" stroke-width="1" opacity="0.5"/>
+              <line x1="22" y1="0" x2="22" y2="15" stroke="white" stroke-width="1" opacity="0.5"/>
+            </g>
+            
+            <g transform="translate(370, 250)">
+              <rect width="50" height="45" rx="6" fill="#7B5AFF" opacity="0.8"/>
+              <line x1="0" y1="17" x2="50" y2="17" stroke="white" stroke-width="1" opacity="0.5"/>
+              <line x1="25" y1="0" x2="25" y2="17" stroke="white" stroke-width="1" opacity="0.5"/>
+            </g>
+            
+            <!-- AI sparkle -->
+            <g transform="translate(400, 80)">
+              <path d="M15 0 L18 12 L30 15 L18 18 L15 30 L12 18 L0 15 L12 12 Z" fill="white" opacity="0.8"/>
+            </g>
+            <g transform="translate(60, 100)">
+              <path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="white" opacity="0.6"/>
+            </g>
+          </svg>
+        </div>
+        
+        <!-- Floating Cards -->
+        <div class="hero-float" style="top: 5%; right: -5%;">
+          <div class="float-icon" style="background: #E6FAF5; color: #05CD99;">📈</div>
+          <div class="float-value">+89%</div>
+          <div class="float-label">Profit Naik</div>
+        </div>
+        <div class="hero-float" style="bottom: 20%; left: 0;">
+          <div class="float-icon" style="background: #F0EDFF; color: #4318FF;">🏆</div>
+          <div class="float-value">4.9★</div>
+          <div class="float-label">Rating Supplier</div>
+        </div>
+        <div class="hero-float" style="bottom: 0; right: 15%;">
+          <div class="float-icon" style="background: #FFF4E0; color: #FFB547;">🤖</div>
+          <div class="float-value">AI</div>
+          <div class="float-label">Smart Rekomendasi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats reveal" id="stats">
+    <div class="container">
+      <h2 class="stats-title">Platform Reseller & Dropshipping Terpercaya</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" data-count="2500">0</div>
+          <div class="stat-label">Reseller Aktif</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span>+</span><span data-count="500">0</span></div>
+          <div class="stat-label">Supplier Terverifikasi</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span>+</span><span data-count="15000">0</span></div>
+          <div class="stat-label">Produk Tersedia</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span data-count="98">0</span>%</div>
+          <div class="stat-label">Tingkat Kepuasan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features reveal" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">✨ Fitur Unggulan</div>
+        <h2>Semua yang Anda Butuhkan untuk Sukses</h2>
+        <p>Platform lengkap dengan fitur-fitur cerdas yang membantu reseller dan supplier untuk berkembang bersama.</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Smart Product Recommendation</h3>
+          <p>Rekomendasi produk personal berdasarkan preferensi dan histori penjualan Anda.</p>
+        </div>
+        
+        <div class="feature-card featured">
+          <div class="feature-icon">🤖</div>
+          <h3>AI Rekomendasi Produk Laris</h3>
+          <p>Analisis tren pasar menggunakan AI untuk menemukan produk yang sedang laris dan berpotensi tinggi.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>Smart Supplier Ranking</h3>
+          <p>Sistem peringkat supplier berdasarkan performa, kualitas, dan kepuasan reseller.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">✅</div>
+          <h3>Smart Validation Order</h3>
+          <p>Validasi otomatis sebelum order untuk memastikan ketersediaan stok dan keamanan transaksi.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Analisis Margin Otomatis</h3>
+          <p>Hitung keuntungan otomatis dengan mempertimbangkan semua biaya dan margin yang optimal.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Auto Profit Calculator</h3>
+          <p>Simulasi keuntungan real-time untuk setiap produk sebelum Anda memutuskan untuk menjual.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Dashboard Performa Reseller</h3>
+          <p>Pantau penjualan, profit, dan performa bisnis Anda dengan dashboard visual yang lengkap.</p>
+        </div>
+        
+        <div class="feature-card featured">
+          <div class="feature-icon">🎓</div>
+          <h3>Mini Academy</h3>
+          <p>Pelajari strategi bisnis dropshipping dari modul edukasi yang dirancang khusus untuk reseller.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Sistem Garansi & Validasi Produk</h3>
+          <p>Escrow system dan validasi produk untuk keamanan transaksi antara supplier dan reseller.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Section -->
+  <section class="why-section reveal" id="why">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-visual">
+          <div class="why-image-wrapper">
+            <svg viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="background: linear-gradient(135deg, #4318FF, #7B5AFF); border-radius: 16px;">
+              <!-- Illustration of partnership -->
+              <rect x="50" y="100" width="180" height="220" rx="16" fill="rgba(255,255,255,0.1)"/>
+              <rect x="270" y="80" width="180" height="240" rx="16" fill="rgba(255,255,255,0.1)"/>
+              
+              <!-- Supplier icon -->
+              <circle cx="140" cy="160" r="35" fill="rgba(255,255,255,0.2)"/>
+              <text x="140" y="170" text-anchor="middle" font-size="35">🏭</text>
+              <text x="140" y="220" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Supplier</text>
+              
+              <!-- Reseller icon -->
+              <circle cx="360" cy="160" r="35" fill="rgba(255,255,255,0.2)"/>
+              <text x="360" y="170" text-anchor="middle" font-size="35">🛒</text>
+              <text x="360" y="220" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Reseller</text>
+              
+              <!-- Connection arrows -->
+              <path d="M180 160 L270 160" stroke="white" stroke-width="2" stroke-dasharray="8 4" opacity="0.6"/>
+              <path d="M180 180 L270 180" stroke="#05CD99" stroke-width="2" stroke-dasharray="8 4" opacity="0.6"/>
+              
+              <!-- Center badge -->
+              <circle cx="225" cy="170" r="25" fill="white"/>
+              <text x="225" y="178" text-anchor="middle" font-size="22">🤝</text>
+              
+              <!-- Stats -->
+              <rect x="80" y="250" width="120" height="50" rx="8" fill="rgba(255,255,255,0.15)"/>
+              <text x="140" y="275" text-anchor="middle" fill="white" font-size="11">🔒 Transaksi Aman</text>
+              <text x="140" y="292" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">Escrow System</text>
+              
+              <rect x="300" y="250" width="120" height="50" rx="8" fill="rgba(255,255,255,0.15)"/>
+              <text x="360" y="275" text-anchor="middle" fill="white" font-size="11">📊 Data Driven</text>
+              <text x="360" y="292" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">AI Analytics</text>
+              
+              <!-- Floating elements -->
+              <circle cx="80" cy="80" r="4" fill="white" opacity="0.4"/>
+              <circle cx="420" cy="60" r="6" fill="#FFB547" opacity="0.5"/>
+              <circle cx="440" cy="340" r="5" fill="#05CD99" opacity="0.4"/>
+              <rect x="60" y="340" width="30" height="30" rx="6" fill="rgba(255,255,255,0.1)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="why-content">
+          <div class="section-tag">🎯 Kenapa GudangMitra?</div>
+          <h2>Platform yang <span class="highlight">Memberdayakan</span> Reseller & Supplier</h2>
+          <p>GudangMitra dirancang untuk menghilangkan hambatan dalam bisnis dropshipping. Dengan teknologi AI dan sistem validasi yang canggih, kami memastikan setiap transaksi berjalan aman dan menguntungkan.</p>
+          
+          <div class="why-list">
+            <div class="why-item">
+              <div class="why-item-icon">🆓</div>
+              <div class="why-item-text">
+                <h4>Tanpa Membership Wajib</h4>
+                <p>Mulai bisnis gratis tanpa biaya membership bulanan.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-item-icon">🔒</div>
+              <div class="why-item-text">
+                <h4>Transaksi Aman (Escrow)</h4>
+                <p>Sistem garansi melindungi setiap transaksi yang dilakukan.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-item-icon">🤖</div>
+              <div class="why-item-text">
+                <h4>AI-Powered Analytics</h4>
+                <p>Rekomendasi cerdas berdasarkan data dan tren pasar terkini.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-item-icon">📚</div>
+              <div class="why-item-text">
+                <h4>Edukasi Bisnis Lengkap</h4>
+                <p>Mini Academy membantu Anda belajar strategi dropshipping yang terbukti.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Preview -->
+  <section class="platform-section reveal" id="platform">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">💻 Platform Preview</div>
+        <h2>Dashboard yang Powerful & Intuitif</h2>
+        <p>Kelola bisnis dropshipping Anda dengan dashboard yang dirancang untuk efisiensi dan kemudahan.</p>
+      </div>
+      
+      <div class="platform-preview">
+        <!-- Dashboard Preview SVG -->
+        <svg viewBox="0 0 900 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="background: #F4F7FE; border-radius: 16px;">
+          <!-- Sidebar -->
+          <rect width="200" height="500" fill="white"/>
+          <rect x="20" y="20" width="160" height="40" rx="8" fill="#F0EDFF"/>
+          <text x="50" y="45" fill="#4318FF" font-size="14" font-weight="bold">📦 GudangMitra</text>
+          
+          <!-- Sidebar items -->
+          <rect x="15" y="80" width="170" height="35" rx="8" fill="#F0EDFF"/>
+          <text x="45" y="102" fill="#4318FF" font-size="11">📊 Dashboard</text>
+          <text x="45" y="142" fill="#707EAE" font-size="11">🎯 Rekomendasi</text>
+          <text x="45" y="172" fill="#707EAE" font-size="11">🏆 Ranking Supplier</text>
+          <text x="45" y="202" fill="#707EAE" font-size="11">✅ Validasi Order</text>
+          <text x="45" y="232" fill="#707EAE" font-size="11">💰 Profit Calculator</text>
+          <text x="45" y="262" fill="#707EAE" font-size="11">📈 Performa</text>
+          <text x="45" y="292" fill="#707EAE" font-size="11">🎓 Academy</text>
+          <text x="45" y="322" fill="#707EAE" font-size="11">🛡️ Garansi</text>
+          
+          <!-- Main content area -->
+          <text x="230" y="45" fill="#1B2559" font-size="16" font-weight="bold">Dashboard Overview</text>
+          
+          <!-- Stat cards -->
+          <rect x="220" y="60" width="155" height="80" rx="12" fill="white" filter="url(#shadow)"/>
+          <text x="240" y="90" fill="#707EAE" font-size="10">Total Penjualan</text>
+          <text x="240" y="115" fill="#1B2559" font-size="20" font-weight="bold">Rp 45.2Jt</text>
+          <text x="240" y="130" fill="#05CD99" font-size="9">↑ +12.5%</text>
+          
+          <rect x="390" y="60" width="155" height="80" rx="12" fill="white"/>
+          <text x="410" y="90" fill="#707EAE" font-size="10">Profit Bersih</text>
+          <text x="410" y="115" fill="#1B2559" font-size="20" font-weight="bold">Rp 8.7Jt</text>
+          <text x="410" y="130" fill="#05CD99" font-size="9">↑ +8.3%</text>
+          
+          <rect x="560" y="60" width="155" height="80" rx="12" fill="white"/>
+          <text x="580" y="90" fill="#707EAE" font-size="10">Total Order</text>
+          <text x="580" y="115" fill="#1B2559" font-size="20" font-weight="bold">342</text>
+          <text x="580" y="130" fill="#05CD99" font-size="9">↑ +5.2%</text>
+          
+          <rect x="730" y="60" width="155" height="80" rx="12" fill="white"/>
+          <text x="750" y="90" fill="#707EAE" font-size="10">Supplier Aktif</text>
+          <text x="750" y="115" fill="#1B2559" font-size="20" font-weight="bold">28</text>
+          <text x="750" y="130" fill="#4318FF" font-size="9">● Terverifikasi</text>
+          
+          <!-- Chart area -->
+          <rect x="220" y="155" width="415" height="200" rx="12" fill="white"/>
+          <text x="240" y="180" fill="#1B2559" font-size="12" font-weight="bold">Penjualan Bulanan</text>
+          
+          <!-- Chart bars -->
+          <rect x="260" y="280" width="30" height="50" rx="4" fill="#4318FF" opacity="0.3"/>
+          <rect x="310" y="260" width="30" height="70" rx="4" fill="#4318FF" opacity="0.4"/>
+          <rect x="360" y="240" width="30" height="90" rx="4" fill="#4318FF" opacity="0.5"/>
+          <rect x="410" y="250" width="30" height="80" rx="4" fill="#4318FF" opacity="0.6"/>
+          <rect x="460" y="220" width="30" height="110" rx="4" fill="#4318FF" opacity="0.8"/>
+          <rect x="510" y="200" width="30" height="130" rx="4" fill="#4318FF"/>
+          <rect x="560" y="230" width="30" height="100" rx="4" fill="#05CD99" opacity="0.8"/>
+          
+          <!-- Labels -->
+          <text x="270" y="345" fill="#A3AED0" font-size="8">Jan</text>
+          <text x="320" y="345" fill="#A3AED0" font-size="8">Feb</text>
+          <text x="370" y="345" fill="#A3AED0" font-size="8">Mar</text>
+          <text x="420" y="345" fill="#A3AED0" font-size="8">Apr</text>
+          <text x="470" y="345" fill="#A3AED0" font-size="8">Mei</text>
+          <text x="520" y="345" fill="#A3AED0" font-size="8">Jun</text>
+          <text x="570" y="345" fill="#A3AED0" font-size="8">Jul</text>
+          
+          <!-- Right panel - Top Products -->
+          <rect x="650" y="155" width="235" height="200" rx="12" fill="white"/>
+          <text x="670" y="180" fill="#1B2559" font-size="12" font-weight="bold">🔥 Produk Terlaris</text>
+          
+          <rect x="665" y="195" width="205" height="35" rx="6" fill="#F4F7FE"/>
+          <text x="685" y="217" fill="#1B2559" font-size="10">Skincare Set Premium</text>
+          <text x="837" y="217" fill="#05CD99" font-size="9" text-anchor="end">+89%</text>
+          
+          <rect x="665" y="238" width="205" height="35" rx="6" fill="#F4F7FE"/>
+          <text x="685" y="260" fill="#1B2559" font-size="10">Kaos Polos Cotton</text>
+          <text x="837" y="260" fill="#05CD99" font-size="9" text-anchor="end">+67%</text>
+          
+          <rect x="665" y="281" width="205" height="35" rx="6" fill="#F4F7FE"/>
+          <text x="685" y="303" fill="#1B2559" font-size="10">Hijab Instan</text>
+          <text x="837" y="303" fill="#05CD99" font-size="9" text-anchor="end">+54%</text>
+          
+          <rect x="665" y="324" width="205" height="20" rx="6" fill="transparent"/>
+          <text x="750" y="340" fill="#4318FF" font-size="9" text-anchor="middle">Lihat Semua →</text>
+          
+          <!-- Bottom section -->
+          <rect x="220" y="370" width="330" height="120" rx="12" fill="white"/>
+          <text x="240" y="395" fill="#1B2559" font-size="12" font-weight="bold">🏆 Top Supplier</text>
+          
+          <circle cx="255" cy="425" r="12" fill="#FFD700"/>
+          <text x="255" y="429" text-anchor="middle" fill="white" font-size="9" font-weight="bold">1</text>
+          <text x="280" y="423" fill="#1B2559" font-size="10">Toko Agung Jaya</text>
+          <text x="280" y="437" fill="#A3AED0" font-size="8">⭐ 4.9 • 1.2K Orders</text>
+          
+          <circle cx="255" cy="465" r="12" fill="#C0C0C0"/>
+          <text x="255" y="469" text-anchor="middle" fill="white" font-size="9" font-weight="bold">2</text>
+          <text x="280" y="463" fill="#1B2559" font-size="10">Berkah Supplier</text>
+          <text x="280" y="477" fill="#A3AED0" font-size="8">⭐ 4.8 • 980 Orders</text>
+          
+          <rect x="565" y="370" width="320" height="120" rx="12" fill="white"/>
+          <text x="585" y="395" fill="#1B2559" font-size="12" font-weight="bold">💰 Profit Calculator</text>
+          
+          <text x="585" y="420" fill="#A3AED0" font-size="9">Harga Modal</text>
+          <rect x="585" y="425" width="130" height="25" rx="6" fill="#F4F7FE"/>
+          <text x="595" y="442" fill="#1B2559" font-size="10">Rp 50.000</text>
+          
+          <text x="730" y="420" fill="#A3AED0" font-size="9">Harga Jual</text>
+          <rect x="730" y="425" width="130" height="25" rx="6" fill="#F4F7FE"/>
+          <text x="740" y="442" fill="#1B2559" font-size="10">Rp 85.000</text>
+          
+          <rect x="585" y="460" width="275" height="25" rx="6" fill="#E6FAF5"/>
+          <text x="722" y="477" text-anchor="middle" fill="#05CD99" font-size="11" font-weight="bold">💵 Profit: Rp 35.000 (70%)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section reveal">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Siap Memulai Bisnis<br>Dropshipping Anda?</h2>
+        <p>Bergabung dengan ribuan reseller dan supplier yang sudah sukses bersama GudangMitra. Gratis, tanpa membership wajib.</p>
+        <div class="cta-buttons">
+          <a href="login.html" class="btn btn-white btn-lg">Daftar Gratis Sekarang</a>
+          <a href="#features" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.3); color: white;">Pelajari Lebih Lanjut</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="navbar-brand">
+            <div class="brand-icon" style="background: linear-gradient(135deg, #4318FF, #7B5AFF); color: white;">📦</div>
+            GudangMitra
+          </a>
+          <p>Platform dropshipping dan reseller terpercaya dengan teknologi AI. Hubungkan supplier dan reseller secara aman dan menguntungkan.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="#features">Fitur Unggulan</a>
+          <a href="login.html">Daftar Reseller</a>
+          <a href="login.html">Daftar Supplier</a>
+          <a href="#stats">Statistik</a>
+        </div>
+        <div class="footer-col">
+          <h4>Fitur</h4>
+          <a href="#">Smart Recommendation</a>
+          <a href="#">Profit Calculator</a>
+          <a href="#">Supplier Ranking</a>
+          <a href="#">Mini Academy</a>
+        </div>
+        <div class="footer-col">
+          <h4>Dukungan</h4>
+          <a href="#">Pusat Bantuan</a>
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Syarat & Ketentuan</a>
+          <a href="https://github.com" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 GudangMitra. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" title="GitHub">💻</a>
+          <a href="#" title="Instagram">📸</a>
+          <a href="#" title="Twitter">🐦</a>
+          <a href="#" title="Email">📧</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

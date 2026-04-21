@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard Reseller - GudangMitra Platform">
+  <title>Dashboard Reseller - GudangMitra</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar Toggle Mobile -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="navbar-brand">
+          <div class="brand-icon">📦</div>
+          GudangMitra
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Menu Utama</div>
+          <div class="sidebar-link active" onclick="showPanel('overview')" data-panel="overview">
+            <span class="link-icon">📊</span> Dashboard
+          </div>
+          <div class="sidebar-link" onclick="showPanel('recommendation')" data-panel="recommendation">
+            <span class="link-icon">🎯</span> Smart Recommendation
+            <span class="link-badge">AI</span>
+          </div>
+          <div class="sidebar-link" onclick="showPanel('trending')" data-panel="trending">
+            <span class="link-icon">🔥</span> Produk Laris AI
+            <span class="link-badge" style="background: var(--accent-green);">New</span>
+          </div>
+          <div class="sidebar-link" onclick="showPanel('supplier-rank')" data-panel="supplier-rank">
+            <span class="link-icon">🏆</span> Ranking Supplier
+          </div>
+        </div>
+        
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Transaksi</div>
+          <div class="sidebar-link" onclick="showPanel('validation')" data-panel="validation">
+            <span class="link-icon">✅</span> Validasi Order
+          </div>
+          <div class="sidebar-link" onclick="showPanel('margin')" data-panel="margin">
+            <span class="link-icon">📊</span> Analisis Margin
+          </div>
+          <div class="sidebar-link" onclick="showPanel('calculator')" data-panel="calculator">
+            <span class="link-icon">💰</span> Profit Calculator
+          </div>
+          <div class="sidebar-link" onclick="showPanel('garansi')" data-panel="garansi">
+            <span class="link-icon">🛡️</span> Sistem Garansi
+          </div>
+        </div>
+        
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Lainnya</div>
+          <div class="sidebar-link" onclick="showPanel('performa')" data-panel="performa">
+            <span class="link-icon">📈</span> Performa Saya
+          </div>
+          <div class="sidebar-link" onclick="showPanel('academy')" data-panel="academy">
+            <span class="link-icon">🎓</span> Mini Academy
+          </div>
+        </div>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar" id="userAvatar">R</div>
+          <div class="user-info">
+            <div class="user-name" id="userName">Reseller Demo</div>
+            <div class="user-role">Reseller</div>
+          </div>
+          <button onclick="logout()" title="Logout" style="background:none;color:var(--gray-400);font-size:1.2rem;cursor:pointer;">🚪</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div>
+          <h1 id="panelTitle">Dashboard Overview</h1>
+          <span class="date-display" id="dateDisplay"></span>
+        </div>
+        <div class="header-actions">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Cari produk, supplier..." id="searchInput" onkeyup="handleSearch(event)">
+          </div>
+          <button class="notification-btn" onclick="showNotification()">
+            🔔
+            <span class="badge">3</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: OVERVIEW ======= -->
+      <div class="content-panel active" id="panel-overview">
+        <div class="dash-stats">
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: var(--primary-bg); color: var(--primary);">💰</div>
+              <div class="stat-change positive">↑ +12.5%</div>
+            </div>
+            <div class="stat-value">Rp 45.2Jt</div>
+            <div class="stat-label">Total Penjualan</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: var(--accent-green-light); color: var(--accent-green);">📈</div>
+              <div class="stat-change positive">↑ +8.3%</div>
+            </div>
+            <div class="stat-value">Rp 8.7Jt</div>
+            <div class="stat-label">Profit Bersih</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: var(--accent-orange-light); color: var(--accent-orange);">📦</div>
+              <div class="stat-change positive">↑ +5.2%</div>
+            </div>
+            <div class="stat-value">342</div>
+            <div class="stat-label">Total Order</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">🏭</div>
+              <div class="stat-change positive">● Active</div>
+            </div>
+            <div class="stat-value">28</div>
+            <div class="stat-label">Supplier Aktif</div>
+          </div>
+        </div>
+
+        <div class="dash-grid-3">
+          <!-- Sales Chart -->
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <h3>📊 Penjualan Bulanan</h3>
+              <div class="panel-actions">
+                <button class="panel-tab active">Bulanan</button>
+                <button class="panel-tab">Mingguan</button>
+              </div>
+            </div>
+            <div class="chart-container">
+              <div class="chart-bars" id="salesChart">
+                <div class="chart-bar" style="height: 40%;" data-label="Jan" data-value="12"></div>
+                <div class="chart-bar" style="height: 55%;" data-label="Feb" data-value="18"></div>
+                <div class="chart-bar" style="height: 70%;" data-label="Mar" data-value="25"></div>
+                <div class="chart-bar" style="height: 60%;" data-label="Apr" data-value="20"></div>
+                <div class="chart-bar" style="height: 85%;" data-label="Mei" data-value="35"></div>
+                <div class="chart-bar" style="height: 95%;" data-label="Jun" data-value="42"></div>
+                <div class="chart-bar green" style="height: 80%;" data-label="Jul" data-value="38"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders -->
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <h3>📋 Order Terbaru</h3>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="ranking-item">
+                <div style="font-size:1.5rem;">📦</div>
+                <div class="ranking-info">
+                  <div class="ranking-name">Skincare Set Premium</div>
+                  <div class="ranking-meta">2 jam lalu • 5 pcs</div>
+                </div>
+                <span class="status-badge success">✓ Selesai</span>
+              </div>
+              <div class="ranking-item">
+                <div style="font-size:1.5rem;">👕</div>
+                <div class="ranking-info">
+                  <div class="ranking-name">Kaos Polos Cotton</div>
+                  <div class="ranking-meta">5 jam lalu • 12 pcs</div>
+                </div>
+                <span class="status-badge warning">⏳ Proses</span>
+              </div>
+              <div class="ranking-item">
+                <div style="font-size:1.5rem;">🧕</div>
+                <div class="ranking-info">
+                  <div class="ranking-name">Hijab Instan Premium</div>
+                  <div class="ranking-meta">1 hari lalu • 8 pcs</div>
+                </div>
+                <span class="status-badge success">✓ Selesai</span>
+              </div>
+              <div class="ranking-item">
+                <div style="font-size:1.5rem;">☕</div>
+                <div class="ranking-info">
+                  <div class="ranking-name">Kopi Arabika 250gr</div>
+                  <div class="ranking-meta">1 hari lalu • 20 pcs</div>
+                </div>
+                <span class="status-badge info">🚛 Dikirim</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: SMART RECOMMENDATION ======= -->
+      <div class="content-panel" id="panel-recommendation">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>🎯 Smart Product Recommendation</h3>
+            <div class="panel-actions">
+              <button class="panel-tab active" onclick="filterProducts('all')">Semua</button>
+              <button class="panel-tab" onclick="filterProducts('fashion')">Fashion</button>
+              <button class="panel-tab" onclick="filterProducts('beauty')">Beauty</button>
+              <button class="panel-tab" onclick="filterProducts('food')">Makanan</button>
+            </div>
+          </div>
+          <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Rekomendasi produk personal berdasarkan preferensi dan riwayat penjualan Anda.</p>
+          
+          <div class="product-grid" id="productGrid">
+            <!-- Products will be loaded by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: AI TRENDING ======= -->
+      <div class="content-panel" id="panel-trending">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>🔥 AI Rekomendasi Produk Laris</h3>
+            <span class="status-badge primary">🤖 Powered by AI</span>
+          </div>
+          <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Analisis tren pasar real-time menggunakan AI untuk menemukan produk yang sedang viral dan berpotensi tinggi.</p>
+          
+          <div class="dash-grid-2">
+            <div class="dash-panel" style="box-shadow: none; border: 1px solid var(--gray-200);">
+              <h4 style="margin-bottom: 16px;">📈 Trend Score (7 Hari)</h4>
+              <div class="chart-container" style="min-height: 200px;">
+                <div class="chart-bars" id="trendChart">
+                  <div class="chart-bar green" style="height: 95%;" data-label="Skincare"></div>
+                  <div class="chart-bar" style="height: 82%;" data-label="Fashion"></div>
+                  <div class="chart-bar orange" style="height: 75%;" data-label="Hijab"></div>
+                  <div class="chart-bar green" style="height: 68%;" data-label="Kopi"></div>
+                  <div class="chart-bar" style="height: 55%;" data-label="Snack"></div>
+                  <div class="chart-bar orange" style="height: 45%;" data-label="Aksesoris"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-panel" style="box-shadow: none; border: 1px solid var(--gray-200);">
+              <h4 style="margin-bottom: 16px;">🔥 Top Trending Now</h4>
+              <div class="ranking-list" id="trendingList">
+                <!-- Loaded by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: SUPPLIER RANKING ======= -->
+      <div class="content-panel" id="panel-supplier-rank">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>🏆 Smart Supplier Ranking</h3>
+            <div class="panel-actions">
+              <button class="panel-tab active">Rating</button>
+              <button class="panel-tab">Order</button>
+              <button class="panel-tab">Kecepatan</button>
+            </div>
+          </div>
+          <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Peringkat supplier berdasarkan performa, kualitas produk, dan kepuasan reseller.</p>
+          
+          <div class="ranking-list" id="supplierRankingList">
+            <!-- Loaded by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: VALIDATION ORDER ======= -->
+      <div class="content-panel" id="panel-validation">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>✅ Smart Validation Order</h3>
+          </div>
+          <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Sistem validasi otomatis sebelum order untuk memastikan ketersediaan dan keamanan transaksi.</p>
+          
+          <!-- Order Form -->
+          <div class="dash-grid-2">
+            <div>
+              <div class="form-group">
+                <label>Pilih Produk</label>
+                <select id="valProduct" onchange="validateOrder()" style="width:100%;padding:12px 16px;background:var(--white);border:2px solid var(--gray-200);border-radius:var(--radius-md);font-size:0.95rem;">
+                  <option value="">-- Pilih Produk --</option>
+                  <option value="skincare">Skincare Set Premium</option>
+                  <option value="kaos">Kaos Polos Cotton 30s</option>
+                  <option value="hijab">Hijab Instan Premium</option>
+                  <option value="kopi">Kopi Arabika Gayo 250gr</option>
+                  <option value="sepatu">Sepatu Sneaker Lokal</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Jumlah Order</label>
+                <input type="number" id="valQty" value="10" min="1" onchange="validateOrder()" style="width:100%;padding:12px 16px;background:var(--white);border:2px solid var(--gray-200);border-radius:var(--radius-md);font-size:0.95rem;">
+              </div>
+              <div class="form-group">
+                <label>Alamat Pengiriman</label>
+                <input type="text" id="valAddress" placeholder="Masukkan alamat lengkap" value="Jl. Merdeka No. 10, Jakarta Selatan" style="width:100%;padding:12px 16px;background:var(--white);border:2px solid var(--gray-200);border-radius:var(--radius-md);font-size:0.95rem;">
+              </div>
+              <button class="btn btn-primary" onclick="submitValidation()" id="btnSubmitOrder">
+                ✅ Submit Order
+              </button>
+            </div>
+
+            <div class="validation-grid" style="grid-template-columns: 1fr;" id="validationResults">
+              <div class="validation-card">
+                <h4>📋 Checklist Validasi</h4>
+                <div class="validation-item">
+                  <span class="v-label">Stok Tersedia</span>
+                  <span class="v-status pending" id="vStock">⏳ Menunggu</span>
+                </div>
+                <div class="validation-item">
+                  <span class="v-label">Supplier Aktif</span>
+                  <span class="v-status pending" id="vSupplier">⏳ Menunggu</span>
+                </div>
+                <div class="validation-item">
+                  <span class="v-label">Harga Valid</span>
+                  <span class="v-status pending" id="vPrice">⏳ Menunggu</span>
+                </div>
+                <div class="validation-item">
+                  <span class="v-label">Alamat Valid</span>
+                  <span class="v-status pending" id="vAddress">⏳ Menunggu</span>
+                </div>
+                <div class="validation-item">
+                  <span class="v-label">Escrow Ready</span>
+                  <span class="v-status pending" id="vEscrow">⏳ Menunggu</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: ANALISIS MARGIN ======= -->
+      <div class="content-panel" id="panel-margin">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>📊 Analisis Margin Otomatis</h3>
+          </div>
+          <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Analisis margin keuntungan otomatis untuk setiap produk yang Anda jual.</p>
+          
+          <div style="overflow-x:auto;">
+            <table class="data-table" id="marginTable">
+              <thead>
+                <tr>
+                  <th>Produk</th>
+                  <th>Harga Modal</th>
+                  <th>Harga Jual</th>
+                  <th>Margin</th>
+                  <th>Status</th>
+                  <th>Rekomendasi</th>
+                </tr>
+              </thead>
+              <tbody id="marginTableBody">
+                <!-- Loaded by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: PROFIT CALCULATOR ======= -->
+      <div class="content-panel" id="panel-calculator">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>💰 Auto Profit Calculator</h3>
+          </div>
+          <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Simulasi keuntungan real-time untuk setiap produk sebelum memutuskan untuk menjual.</p>
+          
+          <div class="calculator-grid">
+            <div>
+              <div class="calc-input-group">
+                <label>Harga Modal (Rp)</label>
+                <input type="number" id="calcCost" value="50000" oninput="calculateProfit()">
+              </div>
+              <div class="calc-input-group">
+                <label>Harga Jual (Rp)</label>
+                <input type="number" id="calcPrice" value="85000" oninput="calculateProfit()">
+              </div>
+              <div class="calc-input-group">
+                <label>Jumlah Unit</label>
+                <input type="number" id="calcQty" value="100" oninput="calculateProfit()">
+              </div>
+              <div class="calc-input-group">
+                <label>Biaya Pengiriman per Unit (Rp)</label>
+                <input type="number" id="calcShipping" value="5000" oninput="calculateProfit()">
+              </div>
+              <div class="calc-input-group">
+                <label>Biaya Platform/Lainnya (Rp)</label>
+                <input type="number" id="calcFee" value="2000" oninput="calculateProfit()">
+              </div>
+            </div>
+            
+            <div>
+              <div class="calc-result" style="margin-bottom: 16px; background: var(--accent-green-light);">
+                <div class="result-label">💰 Profit per Unit</div>
+                <div class="result-value" id="profitPerUnit" style="color: var(--accent-green);">Rp 28.000</div>
+                <div class="result-note" id="profitMarginPercent">Margin: 56%</div>
+              </div>
+              <div class="calc-result" style="margin-bottom: 16px;">
+                <div class="result-label">📦 Total Revenue</div>
+                <div class="result-value" id="totalRevenue">Rp 8.500.000</div>
+                <div class="result-note">100 unit × Rp 85.000</div>
+              </div>
+              <div class="calc-result" style="background: linear-gradient(135deg, #4318FF10, #7B5AFF10);">
+                <div class="result-label">🎯 Total Profit Bersih</div>
+                <div class="result-value" id="totalProfit">Rp 2.800.000</div>
+                <div class="result-note" id="profitNote">Setelah dikurangi semua biaya</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: SISTEM GARANSI ======= -->
+      <div class="content-panel" id="panel-garansi">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>🛡️ Sistem Garansi (Escrow)</h3>
+          </div>
+          <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Sistem escrow menjamin keamanan transaksi antara reseller dan supplier.</p>
+          
+          <div class="dash-grid-2">
+            <div>
+              <h4 style="margin-bottom: 16px;">🔄 Alur Escrow System</h4>
+              <div class="escrow-timeline">
+                <div class="escrow-step completed">
+                  <h4>1. Order Dibuat</h4>
+                  <p>Reseller melakukan order dan dana masuk ke escrow.</p>
+                </div>
+                <div class="escrow-step completed">
+                  <h4>2. Validasi Order</h4>
+                  <p>Sistem memvalidasi stok, supplier, dan detail order.</p>
+                </div>
+                <div class="escrow-step active">
+                  <h4>3. Supplier Proses</h4>
+                  <p>Supplier memproses dan mengirim barang ke pembeli.</p>
+                </div>
+                <div class="escrow-step">
+                  <h4>4. Barang Diterima</h4>
+                  <p>Pembeli konfirmasi penerimaan barang.</p>
+                </div>
+                <div class="escrow-step">
+                  <h4>5. Dana Dilepaskan</h4>
+                  <p>Dana escrow dilepaskan ke supplier setelah konfirmasi.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 style="margin-bottom: 16px;">📋 Transaksi Escrow Aktif</h4>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div class="ranking-item">
+                  <div style="font-size:1.5rem;">🔒</div>
+                  <div class="ranking-info">
+                    <div class="ranking-name">ORD-2026-001</div>
+                    <div class="ranking-meta">Skincare Set • 5 pcs</div>
+                  </div>
+                  <div class="ranking-score">
+                    <div class="score-value" style="color: var(--accent-orange);">Rp 350K</div>
+                    <div class="score-label">⏳ Proses</div>
+                  </div>
+                </div>
+                <div class="ranking-item">
+                  <div style="font-size:1.5rem;">🔒</div>
+                  <div class="ranking-info">
+                    <div class="ranking-name">ORD-2026-002</div>
+                    <div class="ranking-meta">Kaos Cotton • 12 pcs</div>
+                  </div>
+                  <div class="ranking-score">
+                    <div class="score-value" style="color: var(--accent-green);">Rp 720K</div>
+                    <div class="score-label">🚛 Dikirim</div>
+                  </div>
+                </div>
+                <div class="ranking-item">
+                  <div style="font-size:1.5rem;">✅</div>
+                  <div class="ranking-info">
+                    <div class="ranking-name">ORD-2026-003</div>
+                    <div class="ranking-meta">Hijab Premium • 8 pcs</div>
+                  </div>
+                  <div class="ranking-score">
+                    <div class="score-value" style="color: var(--accent-green);">Rp 480K</div>
+                    <div class="score-label">✓ Selesai</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="margin-top: 24px; padding: 16px; background: var(--accent-green-light); border-radius: var(--radius-md);">
+                <div style="font-weight: 700; color: var(--accent-green); margin-bottom: 4px;">💰 Total Dana Escrow</div>
+                <div style="font-size: 1.5rem; font-weight: 800; color: var(--gray-900);">Rp 1.550.000</div>
+                <div style="font-size: 0.82rem; color: var(--gray-500);">3 transaksi aktif</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: PERFORMA ======= -->
+      <div class="content-panel" id="panel-performa">
+        <div class="dash-stats">
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: var(--primary-bg); color: var(--primary);">⭐</div>
+            </div>
+            <div class="stat-value">4.8</div>
+            <div class="stat-label">Rating Saya</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: var(--accent-green-light); color: var(--accent-green);">📦</div>
+            </div>
+            <div class="stat-value">98%</div>
+            <div class="stat-label">Order Success Rate</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: var(--accent-orange-light); color: var(--accent-orange);">🔄</div>
+            </div>
+            <div class="stat-value">2.1%</div>
+            <div class="stat-label">Return Rate</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">🏆</div>
+            </div>
+            <div class="stat-value">#12</div>
+            <div class="stat-label">Peringkat Reseller</div>
+          </div>
+        </div>
+
+        <div class="dash-grid-2">
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <h3>📈 Grafik Performa</h3>
+            </div>
+            <div class="chart-container">
+              <div class="chart-bars">
+                <div class="chart-bar green" style="height: 65%;" data-label="Minggu 1"></div>
+                <div class="chart-bar green" style="height: 72%;" data-label="Minggu 2"></div>
+                <div class="chart-bar green" style="height: 80%;" data-label="Minggu 3"></div>
+                <div class="chart-bar" style="height: 90%;" data-label="Minggu 4"></div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <h3>🎯 Target Bulanan</h3>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:20px;padding-top:8px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.88rem;">
+                  <span style="font-weight:600;">Penjualan</span>
+                  <span style="color:var(--gray-500);">Rp 45.2Jt / Rp 50Jt</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.88rem;">
+                  <span style="font-weight:600;">Order</span>
+                  <span style="color:var(--gray-500);">342 / 400</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill green" style="width: 85%;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.88rem;">
+                  <span style="font-weight:600;">Profit</span>
+                  <span style="color:var(--gray-500);">Rp 8.7Jt / Rp 10Jt</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill orange" style="width: 87%;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.88rem;">
+                  <span style="font-weight:600;">Customer Baru</span>
+                  <span style="color:var(--gray-500);">78 / 100</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 78%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= PANEL: MINI ACADEMY ======= -->
+      <div class="content-panel" id="panel-academy">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>🎓 Mini Academy</h3>
+            <div class="panel-actions">
+              <button class="panel-tab active">Semua</button>
+              <button class="panel-tab">Pemula</button>
+              <button class="panel-tab">Lanjutan</button>
+            </div>
+          </div>
+          <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Pelajari strategi bisnis dropshipping dari modul edukasi yang dirancang khusus untuk reseller.</p>
+          
+          <div class="academy-grid" id="academyGrid">
+            <div class="academy-card">
+              <div class="card-image" style="background: linear-gradient(135deg, #4318FF, #7B5AFF);">
+                <span style="font-size:3rem;">🚀</span>
+                <span class="card-badge">Pemula</span>
+              </div>
+              <div class="card-body">
+                <h4>Memulai Bisnis Dropshipping</h4>
+                <p>Pelajari dasar-dasar dropshipping, cara memilih supplier, dan strategi awal untuk pemula.</p>
+                <div class="card-meta">
+                  <span>📚 8 Modul</span>
+                  <span>⏱️ 2 Jam</span>
+                </div>
+              </div>
+            </div>
+            <div class="academy-card">
+              <div class="card-image" style="background: linear-gradient(135deg, #05CD99, #00E5A0);">
+                <span style="font-size:3rem;">💡</span>
+                <span class="card-badge">Menengah</span>
+              </div>
+              <div class="card-body">
+                <h4>Strategi Marketing Digital</h4>
+                <p>Teknik pemasaran digital efektif untuk meningkatkan penjualan dan brand awareness.</p>
+                <div class="card-meta">
+                  <span>📚 12 Modul</span>
+                  <span>⏱️ 4 Jam</span>
+                </div>
+              </div>
+            </div>
+            <div class="academy-card">
+              <div class="card-image" style="background: linear-gradient(135deg, #FFB547, #FF8A00);">
+                <span style="font-size:3rem;">📊</span>
+                <span class="card-badge">Lanjutan</span>
+              </div>
+              <div class="card-body">
+                <h4>Analisis Data & Margin</h4>
+                <p>Kuasai analisis data untuk optimasi margin dan pengambilan keputusan bisnis yang data-driven.</p>
+                <div class="card-meta">
+                  <span>📚 10 Modul</span>
+                  <span>⏱️ 3 Jam</span>
+                </div>
+              </div>
+            </div>
+            <div class="academy-card">
+              <div class="card-image" style="background: linear-gradient(135deg, #EE5D50, #FF8A80);">
+                <span style="font-size:3rem;">🤝</span>
+                <span class="card-badge">Menengah</span>
+              </div>
+              <div class="card-body">
+                <h4>Membangun Relasi Supplier</h4>
+                <p>Tips dan trik membangun hubungan jangka panjang yang saling menguntungkan dengan supplier.</p>
+                <div class="card-meta">
+                  <span>📚 6 Modul</span>
+                  <span>⏱️ 1.5 Jam</span>
+                </div>
+              </div>
+            </div>
+            <div class="academy-card">
+              <div class="card-image" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">
+                <span style="font-size:3rem;">📱</span>
+                <span class="card-badge">Pemula</span>
+              </div>
+              <div class="card-body">
+                <h4>Optimasi Social Media</h4>
+                <p>Manfaatkan Instagram, TikTok, dan platform lain untuk memperluas jangkauan penjualan.</p>
+                <div class="card-meta">
+                  <span>📚 9 Modul</span>
+                  <span>⏱️ 2.5 Jam</span>
+                </div>
+              </div>
+            </div>
+            <div class="academy-card">
+              <div class="card-image" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
+                <span style="font-size:3rem;">🏆</span>
+                <span class="card-badge">Lanjutan</span>
+              </div>
+              <div class="card-body">
+                <h4>Scaling Bisnis Dropship</h4>
+                <p>Strategi scaling bisnis dropshipping dari puluhan ke ribuan order per bulan.</p>
+                <div class="card-meta">
+                  <span>📚 15 Modul</span>
+                  <span>⏱️ 5 Jam</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/app.js"></script>
+  <script src="js/reseller.js"></script>
+</body>
+</html>

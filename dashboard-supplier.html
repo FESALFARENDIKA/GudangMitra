@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard Supplier - GudangMitra Platform">
+  <title>Dashboard Supplier - GudangMitra</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+</head>
+<body>
+  <div class="dashboard">
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="navbar-brand">
+          <div class="brand-icon">📦</div>
+          GudangMitra
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Menu Utama</div>
+          <div class="sidebar-link active" onclick="showPanel('overview')" data-panel="overview">
+            <span class="link-icon">📊</span> Dashboard
+          </div>
+          <div class="sidebar-link" onclick="showPanel('products')" data-panel="products">
+            <span class="link-icon">📦</span> Validasi Produk
+            <span class="link-badge">5</span>
+          </div>
+          <div class="sidebar-link" onclick="showPanel('ranking')" data-panel="ranking">
+            <span class="link-icon">🏆</span> Ranking Saya
+          </div>
+          <div class="sidebar-link" onclick="showPanel('orders')" data-panel="orders">
+            <span class="link-icon">📋</span> Order Masuk
+            <span class="link-badge" style="background:var(--accent-green);">12</span>
+          </div>
+          <div class="sidebar-link" onclick="showPanel('monitoring')" data-panel="monitoring">
+            <span class="link-icon">🔍</span> Monitoring Validasi
+          </div>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar" style="background:linear-gradient(135deg, #05CD99, #00E5A0);">S</div>
+          <div class="user-info">
+            <div class="user-name" id="userName">Supplier Demo</div>
+            <div class="user-role">Supplier</div>
+          </div>
+          <button onclick="logout()" title="Logout" style="background:none;color:var(--gray-400);font-size:1.2rem;cursor:pointer;">🚪</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div>
+          <h1 id="panelTitle">Dashboard Supplier</h1>
+          <span class="date-display" id="dateDisplay"></span>
+        </div>
+        <div class="header-actions">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Cari produk...">
+          </div>
+          <button class="notification-btn">🔔<span class="badge">5</span></button>
+        </div>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="content-panel active" id="panel-overview">
+        <div class="dash-stats">
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:var(--accent-green-light);color:var(--accent-green);">📦</div>
+              <div class="stat-change positive">↑ +15%</div>
+            </div>
+            <div class="stat-value">156</div>
+            <div class="stat-label">Produk Aktif</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:var(--primary-bg);color:var(--primary);">📋</div>
+              <div class="stat-change positive">↑ +22%</div>
+            </div>
+            <div class="stat-value">847</div>
+            <div class="stat-label">Total Order</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:var(--accent-orange-light);color:var(--accent-orange);">⭐</div>
+            </div>
+            <div class="stat-value">4.9</div>
+            <div class="stat-label">Rating</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-header">
+              <div class="stat-icon" style="background:var(--accent-blue-light);color:var(--accent-blue);">🏆</div>
+            </div>
+            <div class="stat-value">#3</div>
+            <div class="stat-label">Ranking</div>
+          </div>
+        </div>
+
+        <div class="dash-grid-3">
+          <div class="dash-panel">
+            <div class="dash-panel-header"><h3>📊 Order Bulanan</h3></div>
+            <div class="chart-container">
+              <div class="chart-bars">
+                <div class="chart-bar green" style="height:50%;" data-label="Jan"></div>
+                <div class="chart-bar green" style="height:65%;" data-label="Feb"></div>
+                <div class="chart-bar green" style="height:72%;" data-label="Mar"></div>
+                <div class="chart-bar green" style="height:68%;" data-label="Apr"></div>
+                <div class="chart-bar green" style="height:85%;" data-label="Mei"></div>
+                <div class="chart-bar green" style="height:92%;" data-label="Jun"></div>
+                <div class="chart-bar" style="height:88%;" data-label="Jul"></div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-header"><h3>📋 Perlu Perhatian</h3></div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="ranking-item">
+                <div style="font-size:1.3rem;">⚠️</div>
+                <div class="ranking-info">
+                  <div class="ranking-name">5 Produk Perlu Validasi</div>
+                  <div class="ranking-meta">Menunggu review kualitas</div>
+                </div>
+              </div>
+              <div class="ranking-item">
+                <div style="font-size:1.3rem;">📦</div>
+                <div class="ranking-info">
+                  <div class="ranking-name">3 Order Perlu Diproses</div>
+                  <div class="ranking-meta">Deadline: Hari ini</div>
+                </div>
+              </div>
+              <div class="ranking-item">
+                <div style="font-size:1.3rem;">⭐</div>
+                <div class="ranking-info">
+                  <div class="ranking-name">2 Review Baru</div>
+                  <div class="ranking-meta">Dari reseller</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VALIDASI PRODUK -->
+      <div class="content-panel" id="panel-products">
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <h3>📦 Validasi Produk</h3>
+            <button class="btn btn-primary btn-sm" onclick="addProduct()">+ Tambah Produk</button>
+          </div>
+          <p style="color:var(--gray-500);margin-bottom:20px;font-size:0.9rem;">Kelola dan validasi produk untuk memastikan kualitas sebelum dijual ke reseller.</p>
+          
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Produk</th>
+                  <th>Kategori</th>
+                  <th>Harga</th>
+                  <th>Stok</th>
+                  <th>Status Validasi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="product-cell"><div class="product-thumb">🧴</div><div class="product-info"><div class="product-name">Skincare Set Premium</div><div class="product-sku">SKU-001</div></div></div></td>
+                  <td>Beauty</td>
+                  <td>Rp 65.000</td>
+                  <td>250</td>
+                  <td><span class="status-badge success">✓ Valid</span></td>
+                  <td><button class="btn btn-sm btn-outline">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><div class="product-cell"><div class="product-thumb">👕</div><div class="product-info"><div class="product-name">Kaos Polos Cotton 30s</div><div class="product-sku">SKU-002</div></div></div></td>
+                  <td>Fashion</td>
+                  <td>Rp 35.000</td>
+                  <td>500</td>
+                  <td><span class="status-badge success">✓ Valid</span></td>
+                  <td><button class="btn btn-sm btn-outline">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><div class="product-cell"><div class="product-thumb">🧕</div><div class="product-info"><div class="product-name">Hijab Instan Premium</div><div class="product-sku">SKU-003</div></div></div></td>
+                  <td>Fashion</td>
+                  <td>Rp 45.000</td>
+                  <td>180</td>
+                  <td><span class="status-badge warning">⏳ Review</span></td>
+                  <td><button class="btn btn-sm btn-primary" onclick="validateProduct('SKU-003')">Validasi</button></td>
+                </tr>
+                <tr>
+                  <td><div class="product-cell"><div class="product-thumb">☕</div><div class="product-info"><div class="product-name">Kopi Arabika Gayo</div><div class="product-sku">SKU-004</div></div></div></td>
+                  <td>Makanan</td>
+                  <td>Rp 55.000</td>
+                  <td>320</td>
+                  <td><span class="status-badge warning">⏳ Review</span></td>
+                  <td><button class="btn btn-sm btn-primary" onclick="validateProduct('SKU-004')">Validasi</button></td>
+                </tr>
+                <tr>
+                  <td><div class="product-cell"><div class="product-thumb">👟</div><div class="product-info"><div class="product-name">Sepatu Sneaker Lokal</div><div class="product-sku">SKU-005</div></div></div></td>
+                  <td>Fashion</td>
+                  <td>Rp 189.000</td>
+                  <td>75</td>
+                  <td><span class="status-badge danger">✗ Ditolak</span></td>
+                  <td><button class="btn btn-sm btn-outline" onclick="revalidateProduct('SKU-005')">Ajukan Ulang</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- RANKING -->
+      <div class="content-panel" id="panel-ranking">
+        <div class="dash-panel">
+          <div class="dash-panel-header"><h3>🏆 Ranking & Performa Supplier</h3></div>
+          
+          <div class="dash-grid-2">
+            <div>
+              <div style="text-align:center;padding:32px;background:var(--primary-bg);border-radius:var(--radius-xl);margin-bottom:24px;">
+                <div style="font-size:4rem;margin-bottom:8px;">🥉</div>
+                <div style="font-size:2rem;font-weight:800;color:var(--primary);">#3</div>
+                <div style="color:var(--gray-500);font-size:0.9rem;">dari 500+ Supplier</div>
+                <div class="star-rating" style="justify-content:center;margin-top:8px;font-size:1.2rem;">⭐⭐⭐⭐⭐</div>
+                <div style="font-size:0.85rem;color:var(--gray-500);margin-top:4px;">4.9 / 5.0</div>
+              </div>
+              
+              <div style="display:flex;flex-direction:column;gap:16px;">
+                <div>
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.88rem;">
+                    <span style="font-weight:600;">Kualitas Produk</span><span style="color:var(--accent-green);">96%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-fill green" style="width:96%;"></div></div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.88rem;">
+                    <span style="font-weight:600;">Kecepatan Kirim</span><span style="color:var(--primary);">92%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-fill" style="width:92%;"></div></div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.88rem;">
+                    <span style="font-weight:600;">Responsif</span><span style="color:var(--accent-green);">98%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-fill green" style="width:98%;"></div></div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.88rem;">
+                    <span style="font-weight:600;">Kepuasan Reseller</span><span style="color:var(--accent-orange);">89%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-fill orange" style="width:89%;"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 style="margin-bottom:16px;">📊 Review dari Reseller</h4>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="padding:16px;background:var(--gray-50);border-radius:var(--radius-md);">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                    <span style="font-weight:600;font-size:0.9rem;">Toko Berkah</span>
+                    <span class="star-rating">⭐⭐⭐⭐⭐</span>
+                  </div>
+                  <p style="font-size:0.85rem;color:var(--gray-500);">Produk berkualitas, pengiriman cepat, komunikasi responsif!</p>
+                </div>
+                <div style="padding:16px;background:var(--gray-50);border-radius:var(--radius-md);">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                    <span style="font-weight:600;font-size:0.9rem;">Maya Store</span>
+                    <span class="star-rating">⭐⭐⭐⭐⭐</span>
+                  </div>
+                  <p style="font-size:0.85rem;color:var(--gray-500);">Supplier terbaik! Stok selalu ready, harga bersaing.</p>
+                </div>
+                <div style="padding:16px;background:var(--gray-50);border-radius:var(--radius-md);">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                    <span style="font-weight:600;font-size:0.9rem;">Shop Rina</span>
+                    <span class="star-rating">⭐⭐⭐⭐</span>
+                  </div>
+                  <p style="font-size:0.85rem;color:var(--gray-500);">Bagus, cuma pengiriman kadang agak lama ke luar Jawa.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="content-panel" id="panel-orders">
+        <div class="dash-panel">
+          <div class="dash-panel-header"><h3>📋 Order Masuk</h3></div>
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr><th>Order ID</th><th>Reseller</th><th>Produk</th><th>Qty</th><th>Total</th><th>Status</th><th>Aksi</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ORD-001</strong></td><td>Toko Berkah</td><td>Skincare Set</td><td>10</td><td>Rp 650K</td>
+                  <td><span class="status-badge warning">⏳ Pending</span></td>
+                  <td><button class="btn btn-sm btn-primary" onclick="processOrder('ORD-001')">Proses</button></td>
+                </tr>
+                <tr>
+                  <td><strong>ORD-002</strong></td><td>Maya Store</td><td>Kaos Cotton</td><td>25</td><td>Rp 875K</td>
+                  <td><span class="status-badge info">🚛 Dikirim</span></td>
+                  <td><button class="btn btn-sm btn-outline">Detail</button></td>
+                </tr>
+                <tr>
+                  <td><strong>ORD-003</strong></td><td>Shop Rina</td><td>Hijab Premium</td><td>15</td><td>Rp 675K</td>
+                  <td><span class="status-badge success">✓ Selesai</span></td>
+                  <td><button class="btn btn-sm btn-outline">Detail</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONITORING VALIDASI -->
+      <div class="content-panel" id="panel-monitoring">
+        <div class="dash-panel">
+          <div class="dash-panel-header"><h3>🔍 Monitoring Validasi Produk</h3></div>
+          <p style="color:var(--gray-500);margin-bottom:20px;font-size:0.9rem;">Pantau status validasi semua produk untuk kontrol kualitas.</p>
+          
+          <div class="dash-stats" style="margin-bottom:24px;">
+            <div class="dash-stat-card">
+              <div class="stat-value" style="color:var(--accent-green);">142</div>
+              <div class="stat-label">Tervalidasi</div>
+            </div>
+            <div class="dash-stat-card">
+              <div class="stat-value" style="color:var(--accent-orange);">8</div>
+              <div class="stat-label">Pending Review</div>
+            </div>
+            <div class="dash-stat-card">
+              <div class="stat-value" style="color:var(--accent-red);">6</div>
+              <div class="stat-label">Ditolak</div>
+            </div>
+            <div class="dash-stat-card">
+              <div class="stat-value" style="color:var(--primary);">91%</div>
+              <div class="stat-label">Tingkat Lolos</div>
+            </div>
+          </div>
+
+          <div class="validation-grid">
+            <div class="validation-card">
+              <h4>✅ Kriteria Validasi Produk</h4>
+              <div class="validation-item"><span class="v-label">Foto Produk HD</span><span class="v-status pass">✓ Wajib</span></div>
+              <div class="validation-item"><span class="v-label">Deskripsi Lengkap</span><span class="v-status pass">✓ Wajib</span></div>
+              <div class="validation-item"><span class="v-label">Harga Kompetitif</span><span class="v-status pass">✓ Wajib</span></div>
+              <div class="validation-item"><span class="v-label">Stok Minimum 50</span><span class="v-status pass">✓ Wajib</span></div>
+              <div class="validation-item"><span class="v-label">Sertifikat Halal</span><span class="v-status pending">~ Opsional</span></div>
+            </div>
+            <div class="validation-card">
+              <h4>📊 Statistik Bulan Ini</h4>
+              <div class="validation-item"><span class="v-label">Produk Baru Diajukan</span><span class="v-status" style="color:var(--primary);font-weight:700;">14</span></div>
+              <div class="validation-item"><span class="v-label">Lolos Validasi</span><span class="v-status pass">12</span></div>
+              <div class="validation-item"><span class="v-label">Perlu Revisi</span><span class="v-status pending">1</span></div>
+              <div class="validation-item"><span class="v-label">Ditolak</span><span class="v-status fail">1</span></div>
+              <div class="validation-item"><span class="v-label">Rata-rata Waktu Review</span><span class="v-status" style="color:var(--primary);">2 Hari</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/app.js"></script>
+  <script src="js/supplier.js"></script>
+</body>
+</html>
