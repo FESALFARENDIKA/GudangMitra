@@ -1,5 +1,5 @@
 /* ============================================
-   GudangMitra - Authentication JavaScript
+   GudangMitra - Supabase Authentication
    ============================================ */
 
 let selectedRole = 'reseller';
@@ -31,76 +31,66 @@ function switchTab(tab) {
 // ============ Role Selection ============
 function selectRole(role, el) {
   selectedRole = role;
-  // Remove active from all role buttons in same container
   const container = el.parentElement;
   container.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
   el.classList.add('active');
 }
 
 // ============ Handle Login ============
-function handleLogin(e) {
+async function handleLogin(e) {
   e.preventDefault();
   
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
-  
-  // Demo accounts
+  const btn = e.target.querySelector('button[type="submit"]');
+
+  // Fallback for Demo Accounts if Supabase fails or not configured
   const demoAccounts = {
-    'reseller@demo.com': { password: 'demo123', role: 'reseller', name: 'Reseller Demo' },
-    'supplier@demo.com': { password: 'demo123', role: 'supplier', name: 'Supplier Demo' },
-    'admin@demo.com': { password: 'demo123', role: 'admin', name: 'Admin' }
+    'reseller@demo.com': { password: 'demo123', role: 'reseller', full_name: 'Reseller Demo' },
+    'supplier@demo.com': { password: 'demo123', role: 'supplier', full_name: 'Supplier Demo' },
+    'admin@demo.com': { password: 'demo123', role: 'admin', full_name: 'Admin' }
   };
-  
-  // Check registered users from localStorage
-  const users = JSON.parse(localStorage.getItem('gudangmitra_users') || '[]');
-  const registeredUser = users.find(u => u.email === email && u.password === password);
-  
-  let user = null;
-  
+
   if (demoAccounts[email] && demoAccounts[email].password === password) {
-    user = {
-      email: email,
-      role: demoAccounts[email].role,
-      name: demoAccounts[email].name,
-      store: demoAccounts[email].name + ' Store'
-    };
-  } else if (registeredUser) {
-    user = registeredUser;
-  } else {
-    // For demo: allow any login with selected role
-    if (email && password.length >= 3) {
-      user = {
-        email: email,
-        role: selectedRole,
-        name: email.split('@')[0],
-        store: email.split('@')[0] + ' Store'
-      };
-    }
+    // Demo Account Bypass
+    const demoUser = demoAccounts[email];
+    localStorage.setItem('gudangmitra_demo_user', JSON.stringify({
+      email: email, role: demoUser.role, full_name: demoUser.full_name
+    }));
+    showToast(`Selamat datang via Demo, ${demoUser.full_name}!`, 'success');
+    redirectByUserRole(demoUser.role);
+    return;
   }
-  
-  if (user) {
-    localStorage.setItem('gudangmitra_user', JSON.stringify(user));
-    showToast(`Selamat datang, ${user.name}!`, 'success');
+
+  // Real Supabase Login
+  try {
+    btn.textContent = 'Memproses...';
+    btn.disabled = true;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) throw error;
+
+    const user = data.user;
+    const roleMatch = user.user_metadata.role || selectedRole;
     
-    setTimeout(() => {
-      switch (user.role) {
-        case 'supplier':
-          window.location.href = 'dashboard-supplier.html';
-          break;
-        case 'admin':
-          window.location.href = 'dashboard-admin.html';
-          break;
-        default:
-          window.location.href = 'dashboard-reseller.html';
-      }
-    }, 800);
-  } else {
-    showToast('Email atau password salah!', 'error');
+    showToast(`Berhasil masuk!`, 'success');
+    redirectByUserRole(roleMatch);
+
+  } catch (err) {
+    console.error('Login Error:', err);
+    showToast(err.message || 'Email atau password salah!', 'error');
+  } finally {
+    btn.textContent = 'Masuk Sekarang';
+    btn.disabled = false;
   }
 }
 
 // ============ Handle Register ============
-function handleRegister(e) {
+async function handleRegister(e) {
   e.preventDefault();
   
   const name = document.getElementById('regName').value.trim();
@@ -109,6 +99,7 @@ function handleRegister(e) {
   const store = document.getElementById('regStore').value.trim();
   const password = document.getElementById('regPassword').value;
   const confirm = document.getElementById('regConfirm').value;
+  const btn = e.target.querySelector('button[type="submit"]');
   
   if (password !== confirm) {
     showToast('Password tidak cocok!', 'error');
@@ -120,53 +111,46 @@ function handleRegister(e) {
     return;
   }
   
-  // Save to localStorage
-  const users = JSON.parse(localStorage.getItem('gudangmitra_users') || '[]');
-  
-  if (users.find(u => u.email === email)) {
-    showToast('Email sudah terdaftar!', 'error');
-    return;
+  try {
+    btn.textContent = 'Mendaftar...';
+    btn.disabled = true;
+
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          full_name: name,
+          phone: phone,
+          store_name: store,
+          role: selectedRole
+        }
+      }
+    });
+
+    if (error) throw error;
+
+    showToast('Registrasi sukses! Silakan login.', 'success');
+    
+    // Switch to login tab
+    setTimeout(() => {
+      switchTab('login');
+      document.getElementById('loginEmail').value = email;
+      document.getElementById('loginPassword').value = '';
+    }, 1500);
+
+  } catch (err) {
+    console.error('Register Error:', err);
+    showToast(err.message || 'Gagal registrasi!', 'error');
+  } finally {
+    btn.textContent = 'Daftar Sekarang';
+    btn.disabled = false;
   }
-  
-  const newUser = {
-    name, phone, email, store, password,
-    role: selectedRole,
-    joinDate: new Date().toISOString()
-  };
-  
-  users.push(newUser);
-  localStorage.setItem('gudangmitra_users', JSON.stringify(users));
-  
-  showToast('Registrasi berhasil! Silakan login.', 'success');
-  
-  // Switch to login tab
+}
+
+function redirectByUserRole(role) {
   setTimeout(() => {
-    switchTab('login');
-    document.getElementById('loginEmail').value = email;
-  }, 1000);
-}
-
-// ============ Toast for Auth Page ============
-function showToast(message, type = 'info') {
-  const container = document.getElementById('toastContainer');
-  if (!container) return;
-  
-  const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
-  const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
-  toast.innerHTML = `
-    <span class="toast-icon">${icons[type]}</span>
-    <span class="toast-message">${message}</span>
-  `;
-  container.appendChild(toast);
-  setTimeout(() => toast.remove(), 3500);
-}
-
-// ============ Check if already logged in ============
-document.addEventListener('DOMContentLoaded', () => {
-  const user = JSON.parse(localStorage.getItem('gudangmitra_user') || 'null');
-  if (user) {
-    switch (user.role) {
+    switch (role) {
       case 'supplier':
         window.location.href = 'dashboard-supplier.html';
         break;
@@ -176,5 +160,34 @@ document.addEventListener('DOMContentLoaded', () => {
       default:
         window.location.href = 'dashboard-reseller.html';
     }
+  }, 1000);
+}
+
+// ============ Toast ============
+function showToast(message, type = 'info') {
+  const container = document.getElementById('toastContainer');
+  if (!container) return;
+  const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<span class="toast-icon">${icons[type]}</span><span class="toast-message">${message}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3500);
+}
+
+// ============ Check logged in ============
+document.addEventListener('DOMContentLoaded', async () => {
+  // Check Demo First
+  const demoUser = JSON.parse(localStorage.getItem('gudangmitra_demo_user') || 'null');
+  if (demoUser) {
+    redirectByUserRole(demoUser.role);
+    return;
+  }
+
+  // Check Supabase
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) {
+    const role = session.user.user_metadata.role || 'reseller';
+    redirectByUserRole(role);
   }
 });

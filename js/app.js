@@ -138,8 +138,11 @@ function toggleSidebar() {
 }
 
 // ============ Logout ============
-function logout() {
-  localStorage.removeItem('gudangmitra_user');
+async function logout() {
+  localStorage.removeItem('gudangmitra_demo_user');
+  if (typeof supabase !== 'undefined') {
+    await supabase.auth.signOut();
+  }
   showToast('Berhasil logout!', 'success');
   setTimeout(() => {
     window.location.href = 'login.html';
@@ -147,21 +150,37 @@ function logout() {
 }
 
 // ============ Auth Check ============
-function checkAuth() {
-  const user = JSON.parse(localStorage.getItem('gudangmitra_user') || 'null');
-  if (!user) {
-    // Allow access to index and login pages
-    const page = window.location.pathname.split('/').pop();
-    if (page.includes('dashboard')) {
-      window.location.href = 'login.html';
-    }
-  } else {
-    // Update user display
-    const nameEl = document.getElementById('userName');
-    const avatarEl = document.getElementById('userAvatar');
-    if (nameEl) nameEl.textContent = user.name || user.email;
-    if (avatarEl) avatarEl.textContent = (user.name || user.email).charAt(0).toUpperCase();
+async function checkAuth() {
+  const page = window.location.pathname.split('/').pop();
+  const isDashboard = page.includes('dashboard');
+
+  // Check Demo First
+  const demoUser = JSON.parse(localStorage.getItem('gudangmitra_demo_user') || 'null');
+  if (demoUser) {
+    updateUserDisplay(demoUser.full_name || demoUser.email);
+    return; // allow access
   }
+
+  // Check Supabase if configured
+  if (typeof supabase !== 'undefined') {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session && isDashboard) {
+      window.location.href = 'login.html';
+    } else if (session) {
+      const name = session.user.user_metadata.full_name || session.user.email;
+      updateUserDisplay(name);
+    }
+  } else if (isDashboard) {
+    // No supabase and no demo user
+    window.location.href = 'login.html';
+  }
+}
+
+function updateUserDisplay(name) {
+  const nameEl = document.getElementById('userName');
+  const avatarEl = document.getElementById('userAvatar'); // Wait, the HTML uses generic avatar but lets safeguard
+  if (nameEl) nameEl.textContent = name;
+  if (avatarEl) avatarEl.textContent = name.charAt(0).toUpperCase();
 }
 
 // ============ Format Currency ============
