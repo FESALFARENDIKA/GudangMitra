@@ -140,8 +140,8 @@ function toggleSidebar() {
 // ============ Logout ============
 async function logout() {
   localStorage.removeItem('gudangmitra_demo_user');
-  if (typeof supabase !== 'undefined') {
-    await supabase.auth.signOut();
+  if (typeof window.sb !== 'undefined') {
+    await window.sb.auth.signOut();
   }
   showToast('Berhasil logout!', 'success');
   setTimeout(() => {
@@ -154,16 +154,9 @@ async function checkAuth() {
   const page = window.location.pathname.split('/').pop();
   const isDashboard = page.includes('dashboard');
 
-  // Check Demo First
-  const demoUser = JSON.parse(localStorage.getItem('gudangmitra_demo_user') || 'null');
-  if (demoUser) {
-    updateUserDisplay(demoUser.full_name || demoUser.email);
-    return; // allow access
-  }
-
   // Check Supabase if configured
-  if (typeof supabase !== 'undefined') {
-    const { data: { session } } = await supabase.auth.getSession();
+  if (typeof window.sb !== 'undefined') {
+    const { data: { session } } = await window.sb.auth.getSession();
     if (!session && isDashboard) {
       window.location.href = 'login.html';
     } else if (session) {

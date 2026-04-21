@@ -44,30 +44,12 @@ async function handleLogin(e) {
   const password = document.getElementById('loginPassword').value;
   const btn = e.target.querySelector('button[type="submit"]');
 
-  // Fallback for Demo Accounts if Supabase fails or not configured
-  const demoAccounts = {
-    'reseller@demo.com': { password: 'demo123', role: 'reseller', full_name: 'Reseller Demo' },
-    'supplier@demo.com': { password: 'demo123', role: 'supplier', full_name: 'Supplier Demo' },
-    'admin@demo.com': { password: 'demo123', role: 'admin', full_name: 'Admin' }
-  };
-
-  if (demoAccounts[email] && demoAccounts[email].password === password) {
-    // Demo Account Bypass
-    const demoUser = demoAccounts[email];
-    localStorage.setItem('gudangmitra_demo_user', JSON.stringify({
-      email: email, role: demoUser.role, full_name: demoUser.full_name
-    }));
-    showToast(`Selamat datang via Demo, ${demoUser.full_name}!`, 'success');
-    redirectByUserRole(demoUser.role);
-    return;
-  }
-
   // Real Supabase Login
   try {
     btn.textContent = 'Memproses...';
     btn.disabled = true;
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await window.sb.auth.signInWithPassword({
       email: email,
       password: password,
     });
@@ -115,7 +97,7 @@ async function handleRegister(e) {
     btn.textContent = 'Mendaftar...';
     btn.disabled = true;
 
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await window.sb.auth.signUp({
       email: email,
       password: password,
       options: {
@@ -177,17 +159,12 @@ function showToast(message, type = 'info') {
 
 // ============ Check logged in ============
 document.addEventListener('DOMContentLoaded', async () => {
-  // Check Demo First
-  const demoUser = JSON.parse(localStorage.getItem('gudangmitra_demo_user') || 'null');
-  if (demoUser) {
-    redirectByUserRole(demoUser.role);
-    return;
-  }
-
   // Check Supabase
-  const { data: { session } } = await supabase.auth.getSession();
-  if (session) {
-    const role = session.user.user_metadata.role || 'reseller';
-    redirectByUserRole(role);
+  if (window.sb) {
+    const { data: { session } } = await window.sb.auth.getSession();
+    if (session) {
+      const role = session.user.user_metadata.role || 'reseller';
+      redirectByUserRole(role);
+    }
   }
 });

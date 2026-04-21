@@ -1,8 +1,7 @@
 // Konfigurasi Supabase
-// Gunakan CDN versi UMD di HTML (https://cdn.jsdelivr.net/npm/@supabase/supabase-js)
-
 const supabaseUrl = 'https://nxoauoilhocafqwahfxt.supabase.co';
 const supabaseKey = 'sb_publishable_M1ok6j9677xE5Llbdb43Gg_kJ2dTd7O';
 
-// Initialize the Supabase client
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// Initialize the Supabase client correctly avoiding global variable collision
+const sbClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+window.sb = sbClient; // Gunakan window.sb sebagai client utama

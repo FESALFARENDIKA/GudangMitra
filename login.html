@@ -62,22 +62,9 @@
         <!-- Login Form -->
         <div id="loginForm">
           <h1>Masuk ke Akun</h1>
-          <p class="auth-subtitle">Pilih role dan masukkan kredensial Anda</p>
+          <p class="auth-subtitle">Masukkan email dan password Anda</p>
           
-          <div class="role-selector">
-            <div class="role-btn active" onclick="selectRole('reseller', this)" id="roleReseller">
-              <span class="role-icon">🛒</span>
-              Reseller
-            </div>
-            <div class="role-btn" onclick="selectRole('supplier', this)" id="roleSupplier">
-              <span class="role-icon">🏭</span>
-              Supplier
-            </div>
-            <div class="role-btn" onclick="selectRole('admin', this)" id="roleAdmin">
-              <span class="role-icon">⚙️</span>
-              Admin
-            </div>
-          </div>
+
 
           <form onsubmit="handleLogin(event)">
             <div class="form-group">
@@ -99,14 +86,7 @@
             </button>
           </form>
 
-          <div class="demo-accounts">
-            <h4>🔑 Demo Accounts</h4>
-            <p>
-              <strong>Reseller:</strong> <code>reseller@demo.com</code> / <code>demo123</code><br>
-              <strong>Supplier:</strong> <code>supplier@demo.com</code> / <code>demo123</code><br>
-              <strong>Admin:</strong> <code>admin@demo.com</code> / <code>demo123</code>
-            </p>
-          </div>
+
         </div>
 
         <!-- Register Form -->

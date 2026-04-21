@@ -28,14 +28,12 @@
           </div>
           <div class="sidebar-link" onclick="showPanel('products')" data-panel="products">
             <span class="link-icon">📦</span> Validasi Produk
-            <span class="link-badge">5</span>
           </div>
           <div class="sidebar-link" onclick="showPanel('ranking')" data-panel="ranking">
             <span class="link-icon">🏆</span> Ranking Saya
           </div>
           <div class="sidebar-link" onclick="showPanel('orders')" data-panel="orders">
             <span class="link-icon">📋</span> Order Masuk
-            <span class="link-badge" style="background:var(--accent-green);">12</span>
           </div>
           <div class="sidebar-link" onclick="showPanel('monitoring')" data-panel="monitoring">
             <span class="link-icon">🔍</span> Monitoring Validasi
@@ -69,7 +67,7 @@
             <span class="search-icon">🔍</span>
             <input type="text" placeholder="Cari produk...">
           </div>
-          <button class="notification-btn">🔔<span class="badge">5</span></button>
+          <button class="notification-btn">🔔</button>
         </div>
       </div>
 
@@ -374,6 +372,67 @@
   </div>
 
   <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Add Product Modal -->
+  <div id="addProductModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+    <div style="background:white;padding:24px;border-radius:12px;width:100%;max-width:500px;">
+      <h2 style="margin-top:0;margin-bottom:16px;">Tambah Produk Baru</h2>
+      <form id="addProductForm" onsubmit="submitProductForm(event)">
+        <div class="form-group" style="margin-bottom:12px">
+          <label>Nama Produk</label>
+          <input type="text" id="addName" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;">
+        </div>
+        <div class="form-group" style="margin-bottom:12px">
+          <label>Kategori</label>
+          <select id="addCategory" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;">
+            <option value="fashion">Fashion</option>
+            <option value="beauty">Beauty</option>
+            <option value="food">Makanan</option>
+            <option value="lainnya">Lainnya</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:12px;margin-bottom:12px;">
+          <div class="form-group" style="flex:1;">
+            <label>Harga Modal (Rp)</label>
+            <input type="number" id="addCost" required min="1000" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;">
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label>Harga Jual (Rp)</label>
+            <input type="number" id="addPrice" required min="1000" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;">
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;margin-bottom:16px;">
+          <div class="form-group" style="flex:1;">
+            <label>Stok Awal</label>
+            <input type="number" id="addStock" required min="1" value="10" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;">
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label>URL Foto Produk</label>
+            <input type="url" id="addImage" placeholder="https://..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;">
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:12px;">
+          <button type="button" class="btn btn-outline" onclick="closeAddModal()">Batal</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveProduct">Simpan Produk</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Process Order (Resi) Modal -->
+  <div id="processOrderModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+    <div style="background:white;padding:24px;border-radius:12px;width:100%;max-width:400px;text-align:center;">
+      <div style="font-size:3rem;margin-bottom:16px;">📦</div>
+      <h3 style="margin-top:0;margin-bottom:8px;">Kirim Pesanan Ini?</h3>
+      <p style="color:var(--gray-500);font-size:0.9rem;margin-bottom:24px;">Status order akan diubah menjadi <strong>Dikirim (Shipped)</strong> dan Reseller akan dinotifikasi melalui sistem.</p>
+      
+      <div style="display:flex;justify-content:center;gap:12px;">
+        <button type="button" class="btn btn-outline" onclick="closeProcessModal()">Batal</button>
+        <button type="button" class="btn btn-primary" id="btnConfirmProcess" onclick="confirmProcessOrder()">Ya, Kirim Sekarang</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script><script src="js/app.js"></script>
   <script src="js/supplier.js"></script>
 </body>

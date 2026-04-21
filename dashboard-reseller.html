@@ -44,7 +44,7 @@
         <div class="sidebar-section">
           <div class="sidebar-section-title">Transaksi</div>
           <div class="sidebar-link" onclick="showPanel('validation')" data-panel="validation">
-            <span class="link-icon">✅</span> Validasi Order
+            <span class="link-icon">✅</span> Order
           </div>
           <div class="sidebar-link" onclick="showPanel('margin')" data-panel="margin">
             <span class="link-icon">📊</span> Analisis Margin
@@ -53,7 +53,7 @@
             <span class="link-icon">💰</span> Profit Calculator
           </div>
           <div class="sidebar-link" onclick="showPanel('garansi')" data-panel="garansi">
-            <span class="link-icon">🛡️</span> Sistem Garansi
+            <span class="link-icon">🛡️</span> Transaksi
           </div>
         </div>
         
@@ -423,11 +423,11 @@
         </div>
       </div>
 
-      <!-- ======= PANEL: SISTEM GARANSI ======= -->
+      <!-- ======= PANEL: TRANSAKSI ======= -->
       <div class="content-panel" id="panel-garansi">
         <div class="dash-panel">
           <div class="dash-panel-header">
-            <h3>🛡️ Sistem Garansi (Escrow)</h3>
+            <h3>🛡️ Transaksi (Escrow)</h3>
           </div>
           <p style="color: var(--gray-500); margin-bottom: 20px; font-size: 0.9rem;">Sistem escrow menjamin keamanan transaksi antara reseller dan supplier.</p>
           
@@ -459,47 +459,15 @@
             </div>
             
             <div>
-              <h4 style="margin-bottom: 16px;">📋 Transaksi Escrow Aktif</h4>
-              <div style="display:flex;flex-direction:column;gap:12px;">
-                <div class="ranking-item">
-                  <div style="font-size:1.5rem;">🔒</div>
-                  <div class="ranking-info">
-                    <div class="ranking-name">ORD-2026-001</div>
-                    <div class="ranking-meta">Skincare Set • 5 pcs</div>
-                  </div>
-                  <div class="ranking-score">
-                    <div class="score-value" style="color: var(--accent-orange);">Rp 350K</div>
-                    <div class="score-label">⏳ Proses</div>
-                  </div>
-                </div>
-                <div class="ranking-item">
-                  <div style="font-size:1.5rem;">🔒</div>
-                  <div class="ranking-info">
-                    <div class="ranking-name">ORD-2026-002</div>
-                    <div class="ranking-meta">Kaos Cotton • 12 pcs</div>
-                  </div>
-                  <div class="ranking-score">
-                    <div class="score-value" style="color: var(--accent-green);">Rp 720K</div>
-                    <div class="score-label">🚛 Dikirim</div>
-                  </div>
-                </div>
-                <div class="ranking-item">
-                  <div style="font-size:1.5rem;">✅</div>
-                  <div class="ranking-info">
-                    <div class="ranking-name">ORD-2026-003</div>
-                    <div class="ranking-meta">Hijab Premium • 8 pcs</div>
-                  </div>
-                  <div class="ranking-score">
-                    <div class="score-value" style="color: var(--accent-green);">Rp 480K</div>
-                    <div class="score-label">✓ Selesai</div>
-                  </div>
-                </div>
+              <h4 style="margin-bottom: 16px;">📋 Riwayat Transaksi Aktif</h4>
+              <div id="transactionList" style="display:flex;flex-direction:column;gap:12px;">
+                <!-- Loaded by JS -->
               </div>
               
               <div style="margin-top: 24px; padding: 16px; background: var(--accent-green-light); border-radius: var(--radius-md);">
-                <div style="font-weight: 700; color: var(--accent-green); margin-bottom: 4px;">💰 Total Dana Escrow</div>
-                <div style="font-size: 1.5rem; font-weight: 800; color: var(--gray-900);">Rp 1.550.000</div>
-                <div style="font-size: 0.82rem; color: var(--gray-500);">3 transaksi aktif</div>
+                <div style="font-weight: 700; color: var(--accent-green); margin-bottom: 4px;">💰 Total Dana Escrow Aktif</div>
+                <div style="font-size: 1.5rem; font-weight: 800; color: var(--gray-900);" id="escrowTotal">Rp 0</div>
+                <div style="font-size: 0.82rem; color: var(--gray-500);" id="escrowCount">0 transaksi aktif</div>
               </div>
             </div>
           </div>
